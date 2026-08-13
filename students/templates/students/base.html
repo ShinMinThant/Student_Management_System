@@ -2,75 +2,161 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
 
-    <title>{% block title %} Student Management System {% endblock %}</title>
+    <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="{% static 'students/style.css' %}" />
-  </head>
-  <script>
-    setTimeout(function () {
-      const messages = document.querySelectorAll(".message");
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-      messages.forEach(function (message) {
-        message.style.opacity = "0";
+    <title>
+        {% block title %}
+        Student Management System
+        {% endblock %}
+    </title>
 
-        setTimeout(function () {
-          message.remove();
-        }, 500);
-      });
-    }, 3000);
-  </script>
+    <link
+        rel="stylesheet"
+        href="{% static 'students/style.css' %}"
+    >
 
-  <body>
+</head>
+
+<body>
+
     <!-- Navigation Bar -->
 
     <nav class="navbar">
-      <div class="nav-brand">Student Management</div>
 
-      <div class="nav-links">
-        <a
-          href="{% url 'dashboard' %}"
-          class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
-        >
-          Dashboard
-        </a>
+        <div class="nav-brand">
+            Student Management
+        </div>
 
-        <a
-          href="{% url 'student_list' %}"
-          class="{% if request.resolver_match.url_name == 'student_list' or request.resolver_match.url_name == 'student_detail' or request.resolver_match.url_name == 'edit_student' or request.resolver_match.url_name == 'delete_student' %}active{% endif %}"
-        >
-          Students
-        </a>
 
-        <a
-          href="{% url 'add_student' %}"
-          class="{% if request.resolver_match.url_name == 'add_student' %}active{% endif %}"
-        >
-          + Add Student
-        </a>
-      </div>
+        <div class="nav-links">
+
+            {% if user.is_authenticated %}
+
+                <!-- Dashboard -->
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                >
+                    Dashboard
+                </a>
+
+
+                <!-- Students -->
+
+                <a
+                    href="{% url 'student_list' %}"
+                    class="{% if request.resolver_match.url_name == 'student_list' or request.resolver_match.url_name == 'student_detail' or request.resolver_match.url_name == 'edit_student' or request.resolver_match.url_name == 'delete_student' %}active{% endif %}"
+                >
+                    Students
+                </a>
+
+
+                <!-- Add Student -->
+
+                <a
+                    href="{% url 'add_student' %}"
+                    class="{% if request.resolver_match.url_name == 'add_student' %}active{% endif %}"
+                >
+                    + Add Student
+                </a>
+
+
+                <!-- Username -->
+
+                <span class="welcome-user">
+                    Welcome, {{ user.username }}
+                </span>
+
+
+                <!-- Logout -->
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+
+            {% else %}
+
+                <!-- Login -->
+
+                <a
+                    href="{% url 'login' %}"
+                    class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}"
+                >
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
     </nav>
+
 
     <!-- Messages -->
 
     {% if messages %}
 
-    <div class="messages">
-      {% for message in messages %}
+        <div class="messages">
 
-      <div class="message">{{ message }}</div>
+            {% for message in messages %}
 
-      {% endfor %}
-    </div>
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
 
     {% endif %}
 
+
     <!-- Main Content -->
 
-    <main>{% block content %} {% endblock %}</main>
-  </body>
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- Auto Hide Messages -->
+
+    <script>
+
+        setTimeout(function () {
+
+            const messages =
+                document.querySelectorAll(".message");
+
+            messages.forEach(function (message) {
+
+                message.style.opacity = "0";
+
+                setTimeout(function () {
+
+                    message.remove();
+
+                }, 500);
+
+            });
+
+        }, 3000);
+
+    </script>
+
+</body>
+
 </html>

@@ -586,3 +586,98 @@ body {
     text-align: center;
     font-weight: 500;
 }
+
+.welcome-user {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* =========================
+   Login Page
+========================= */
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h1 {
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #777;
+}
+
+
+/* Login Form */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.login-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+
+/* Login Button */
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #4a90e2;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* Login Error */
+
+.login-error {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    background: #ffe5e5;
+    color: #d63031;
+    text-align: center;
+}
