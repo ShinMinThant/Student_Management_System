@@ -1,0 +1,204 @@
+{% extends 'students/base.html' %}
+
+{% block title %}
+Students
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Student List</h1>
+
+        <a href="{% url 'add_student' %}" class="add-btn">
+            + Add Student
+        </a>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <form method="GET">
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Search by name or student ID..."
+                value="{{ query }}"
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Search Result -->
+
+    {% if query %}
+
+        <div class="search-result-info">
+
+            <p>
+                Search results for
+                "<strong>{{ query }}</strong>":
+                {{ total_students }}
+                student{{ total_students|pluralize }}
+            </p>
+
+            <a
+                href="{% url 'student_list' %}"
+                class="clear-search-btn"
+            >
+                Clear Search
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <p>
+            Total Students:
+            <strong>{{ total_students }}</strong>
+        </p>
+
+    {% endif %}
+
+
+    <!-- Student Table -->
+
+    {% if students %}
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Major</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for student in students %}
+
+                    <tr>
+
+                        <td>
+                            {{ student.student_id }}
+                        </td>
+
+                        <td>
+                            {{ student.name }}
+                        </td>
+
+                        <td>
+                            {{ student.email }}
+                        </td>
+
+                        <td>
+                            {{ student.major }}
+                        </td>
+
+                        <td>
+                            {{ student.year }}
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="{% url 'student_detail' student.id %}"
+                                class="view-btn"
+                            >
+                                View
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+    {% else %}
+
+        <div class="no-student">
+
+            <h3>No students found</h3>
+
+            <p>
+                Try searching with another name or student ID.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a
+                href="?page=1{% if query %}&q={{ query }}{% endif %}"
+            >
+                First
+            </a>
+
+            <a
+                href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}"
+            >
+                Previous
+            </a>
+
+        {% endif %}
+
+
+        <span>
+            Page {{ page_obj.number }}
+            of {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+            <a
+                href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}"
+            >
+                Next
+            </a>
+
+            <a
+                href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}"
+            >
+                Last
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

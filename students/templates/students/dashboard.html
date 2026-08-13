@@ -1,0 +1,176 @@
+{% extends 'students/base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+        <h1>Student Management Dashboard</h1>
+    </div>
+
+
+    <!-- Dashboard Cards -->
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+
+            <h2>Total Students</h2>
+
+            <div class="student-count">
+                {{ total_students }}
+            </div>
+
+            <a
+                href="{% url 'student_list' %}"
+                class="dashboard-btn"
+            >
+                View Students
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <h2>Recent Students</h2>
+
+            <div class="student-count">
+                {{ recent_students|length }}
+            </div>
+
+            <span>Latest 5 students</span>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <h2>Latest Student</h2>
+
+            {% if latest_student %}
+
+                <div class="latest-name">
+                    {{ latest_student.name }}
+                </div>
+
+            {% else %}
+
+                <div class="latest-name">
+                    No students
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="dashboard-search">
+
+        <h2>Find a Student</h2>
+
+        <form
+            method="GET"
+            action="{% url 'student_list' %}"
+        >
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Search by name or student ID..."
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Recent Students -->
+
+    <div class="recent-section">
+
+        <h2>Recent Students</h2>
+
+        <table class="recent-table">
+
+            <thead>
+
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for student in recent_students %}
+
+                <tr>
+
+                    <td>
+                        {{ student.student_id }}
+                    </td>
+
+                    <td>
+                        {{ student.name }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'student_detail' student.id %}"
+                        >
+                            View
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="3">
+                        No students found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <br>
+
+
+    <a
+        href="{% url 'add_student' %}"
+        class="add-btn"
+    >
+        + Add Student
+    </a>
+
+</div>
+
+{% endblock %}

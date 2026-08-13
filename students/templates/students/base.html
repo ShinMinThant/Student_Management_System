@@ -1,0 +1,76 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %} Student Management System {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'students/style.css' %}" />
+  </head>
+  <script>
+    setTimeout(function () {
+      const messages = document.querySelectorAll(".message");
+
+      messages.forEach(function (message) {
+        message.style.opacity = "0";
+
+        setTimeout(function () {
+          message.remove();
+        }, 500);
+      });
+    }, 3000);
+  </script>
+
+  <body>
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+      <div class="nav-brand">Student Management</div>
+
+      <div class="nav-links">
+        <a
+          href="{% url 'dashboard' %}"
+          class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+        >
+          Dashboard
+        </a>
+
+        <a
+          href="{% url 'student_list' %}"
+          class="{% if request.resolver_match.url_name == 'student_list' or request.resolver_match.url_name == 'student_detail' or request.resolver_match.url_name == 'edit_student' or request.resolver_match.url_name == 'delete_student' %}active{% endif %}"
+        >
+          Students
+        </a>
+
+        <a
+          href="{% url 'add_student' %}"
+          class="{% if request.resolver_match.url_name == 'add_student' %}active{% endif %}"
+        >
+          + Add Student
+        </a>
+      </div>
+    </nav>
+
+    <!-- Messages -->
+
+    {% if messages %}
+
+    <div class="messages">
+      {% for message in messages %}
+
+      <div class="message">{{ message }}</div>
+
+      {% endfor %}
+    </div>
+
+    {% endif %}
+
+    <!-- Main Content -->
+
+    <main>{% block content %} {% endblock %}</main>
+  </body>
+</html>
