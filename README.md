@@ -29,6 +29,20 @@ A simple and user-friendly Student Management System built with Django.
 - Django Templates
 - Git & GitHub
 
+## Screenshots
+
+### Login
+![Login](screenshots/login.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Student List
+![Student List](screenshots/student-list.png)
+
+### Student Detail
+![Student Detail](screenshots/student-detail.png)
+
 ## Project Structure
 
 ```text

@@ -52,6 +52,15 @@ Student Detail
                 <strong>{{ student.year }}</strong>
             </div>
 
+
+            <div class="info-row">
+                <span>Created</span>
+
+                <strong>
+                    {{ student.created_at|date:"F d, Y - h:i A" }}
+                </strong>
+            </div>
+
         </div>
 
 

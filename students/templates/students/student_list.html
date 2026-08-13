@@ -12,7 +12,10 @@ Students
 
         <h1>Student List</h1>
 
-        <a href="{% url 'add_student' %}" class="add-btn">
+        <a
+            href="{% url 'add_student' %}"
+            class="add-btn"
+        >
             + Add Student
         </a>
 
@@ -82,12 +85,15 @@ Students
             <thead>
 
                 <tr>
+
                     <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Major</th>
                     <th>Year</th>
+                    <th>Created</th>
                     <th>Action</th>
+
                 </tr>
 
             </thead>
@@ -120,6 +126,10 @@ Students
                         </td>
 
                         <td>
+                            {{ student.created_at|date:"M d, Y" }}
+                        </td>
+
+                        <td>
 
                             <a
                                 href="{% url 'student_detail' student.id %}"
@@ -138,12 +148,13 @@ Students
 
         </table>
 
-
     {% else %}
 
         <div class="no-student">
 
-            <h3>No students found</h3>
+            <h3>
+                No students found
+            </h3>
 
             <p>
                 Try searching with another name or student ID.
