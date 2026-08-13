@@ -2,6 +2,15 @@
 
 A simple, responsive, and user-friendly Student Management System built with Django.
 
+## Demo Login
+
+The application requires authentication to access the student management features.
+
+For demonstration purposes:
+
+* Username: SMT
+* Password: smt123
+
 Live Demo: https://student-management-system-xu85.onrender.com/
 
 ## Features
