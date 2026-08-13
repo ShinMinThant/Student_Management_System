@@ -23,7 +23,9 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'student-management-system-xu85.onrender.com',
+]
 
 
 # ============================================================
